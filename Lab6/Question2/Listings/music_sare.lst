@@ -1,0 +1,96 @@
+C51 COMPILER V9.60.0.0   MUSIC_SARE                                                        03/08/2021 19:29:38 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MUSIC_SARE
+OBJECT MODULE PLACED IN .\Objects\music_sare.obj
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE music_sare.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\m
+                    -usic_sare.lst) TABS(2) OBJECT(.\Objects\music_sare.obj)
+
+line level    source
+
+   1          //Header files
+   2          #include <at89c5131.h>
+   3          #include <stdio.h>  //for sprintf functions
+   4          
+   5          //Bit definitions
+   6          sbit IM = P1^4;     // on when Sa ; off when Re
+   7          sbit Music_OP = P0^0;
+   8          //Global variables
+   9          unsigned char addr = 0x80;
+  10          unsigned int count_T1 = 100;
+  11          
+  12          //Timer 0 ISR
+  13          void Timer0_Interrupt(void) interrupt 1
+  14          { 
+  15   1              TF0 = 0;
+  16   1              TR0 = 0;
+  17   1              Music_OP = !Music_OP;
+  18   1              if(IM==1){  //sa
+  19   2                TH0 = 0xef;
+  20   2                TL0 = 0xb9;
+  21   2              }
+  22   1              else{
+  23   2                TH0 = 0xf1;
+  24   2                TL0 = 0x88;
+  25   2              }
+  26   1              TR0 = 1;
+  27   1              return;
+  28   1      }
+  29          
+  30          //Timer 1 ISR
+  31          void Timer1_Interrupt(void) interrupt 3
+  32          {   
+  33   1          TF1 = 0;
+  34   1          TR1 = 0;
+  35   1          TH1 = 0x63;
+  36   1          TL1 = 0xc0;
+  37   1          TR1 = 1;
+  38   1          if(count_T1==0){
+  39   2              IM = !IM;
+  40   2              count_T1 = 100; 
+  41   2              return;
+  42   2          }
+  43   1          count_T1 = count_T1 - 1;
+  44   1          return; 
+  45   1      }
+  46          
+  47          void timer_init(void)
+  48          {     TMOD = 0x11;
+  49   1            //MOV TCON,#0x01
+  50   1            ET0 = 1;
+  51   1            ET1 = 1;
+  52   1            TH0 = 0xef;
+  53   1            TH1 = 0x63;
+  54   1            TL0 = 0xb9;
+C51 COMPILER V9.60.0.0   MUSIC_SARE                                                        03/08/2021 19:29:38 PAGE 2   
+
+  55   1            TL1 = 0xc0;
+  56   1            EA = 1;
+  57   1            TR0 = 1;
+  58   1            TR1 = 1;
+  59   1            return;  
+  60   1      }
+  61          //Main function
+  62          int main(void)
+  63          { 
+  64   1        timer_init();
+  65   1        IM = 1;
+  66   1        Music_OP = 1;
+  67   1        while(1){
+  68   2        }
+  69   1      }
+  70            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    101    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

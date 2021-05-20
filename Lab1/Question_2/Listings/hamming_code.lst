@@ -1,0 +1,131 @@
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 14:49:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\hamming_code.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE hamming_code.asm SET(SMALL) DEBUG PRINT(.\Listings\hammin
+                      g_code.lst) OBJECT(.\Objects\hamming_code.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+0100                   4     main: 
+                       5     
+0100 7570FF            6     mov 70h, #0FFh;
+0103 7571FF            7     mov 71h, #0FFh; 
+                       8     
+                       9     
+0106 E570             10     mov A, 70h       
+0108 540F             11     anl A, #0Fh  
+010A F5F0             12     mov B, A         
+010C C4               13     SWAP A           
+010D 25F0             14     add A, B         
+010F FB               15     mov R3, A
+0110 23               16     RL A
+0111 FC               17     mov R4, A
+0112 23               18     RL A 
+0113 6B               19     XRL A,R3
+0114 6C               20     XRL A,R4
+                      21     
+0115 A2E3             22     mov C, ACC.3 
+0117 92F6             23     mov B.6, C 
+0119 A2E1             24     mov C, ACC.1 
+011B 92F5             25     mov B.5, C 
+011D A2E0             26     mov C, ACC.0 
+011F 92F4             27     mov B.4, C 
+                      28     
+0121 85F072           29     mov 72h, B
+                      30     
+                      31     
+0124 E570             32     mov A, 70h       
+0126 54F0             33     anl A, #0F0h  
+0128 F5F0             34     mov B, A     
+012A C4               35     SWAP A           
+012B FD               36     mov R5, A        
+012C 25F0             37     add A, B         
+012E FB               38     mov R3, A
+012F 23               39     RL A
+0130 FC               40     mov R4, A
+0131 23               41     RL A 
+0132 6B               42     XRL A,R3
+0133 6C               43     XRL A,R4
+                      44     
+0134 8DF0             45     mov B, R5
+0136 A2E3             46     mov C, ACC.3 
+0138 92F6             47     mov B.6, C 
+013A A2E1             48     mov C, ACC.1 
+013C 92F5             49     mov B.5, C 
+013E A2E0             50     mov C, ACC.0 
+0140 92F4             51     mov B.4, C 
+                      52     
+0142 85F073           53     mov 73h, B
+                      54     
+                      55     
+0145 E571             56     mov A, 71h       
+0147 540F             57     anl A, #0Fh  
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 14:49:12 PAGE     2
+
+0149 F5F0             58     mov B, A         
+014B C4               59     SWAP A           
+014C 25F0             60     add A, B         
+014E FB               61     mov R3, A
+014F 23               62     RL A
+0150 FC               63     mov R4, A
+0151 23               64     RL A 
+0152 6B               65     XRL A,R3
+0153 6C               66     XRL A,R4
+                      67     
+0154 A2E3             68     mov C, ACC.3 
+0156 92F6             69     mov B.6, C 
+0158 A2E1             70     mov C, ACC.1 
+015A 92F5             71     mov B.5, C 
+015C A2E0             72     mov C, ACC.0 
+015E 92F4             73     mov B.4, C 
+                      74     
+0160 85F074           75     mov 74h, B
+                      76     
+                      77     
+0163 E571             78     mov A, 71h       
+0165 54F0             79     anl A, #0F0h  
+0167 F5F0             80     mov B, A     
+0169 C4               81     SWAP A           
+016A FD               82     mov R5, A        
+016B 25F0             83     add A, B         
+016D FB               84     mov R3, A
+016E 23               85     RL A
+016F FC               86     mov R4, A
+0170 23               87     RL A 
+0171 6B               88     XRL A,R3
+0172 6C               89     XRL A,R4
+                      90     
+0173 8DF0             91     mov B, R5
+0175 A2E3             92     mov C, ACC.3 
+0177 92F6             93     mov B.6, C 
+0179 A2E1             94     mov C, ACC.1 
+017B 92F5             95     mov B.5, C 
+017D A2E0             96     mov C, ACC.0 
+017F 92F4             97     mov B.4, C 
+0181 85F075           98     mov 75h, B
+                      99     
+0184 80FE            100     here: sjmp here
+                     101     end
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 14:49:12 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0184H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

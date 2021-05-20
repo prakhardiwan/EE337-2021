@@ -1,0 +1,83 @@
+A51 MACRO ASSEMBLER  LED_BLINK_WITH_HW_DELAY                                              02/17/2021 00:14:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\led_blink_with_hw_delay.obj
+ASSEMBLER INVOKED BY: D:\Keil\C51\BIN\A51.EXE led_blink_with_hw_delay.asm SET(SMALL) DEBUG PRINT(.\Listings\led_blink_wi
+                      th_hw_delay.lst) OBJECT(.\Objects\led_blink_with_hw_delay.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+000B                   3     org 000bh
+                       4     
+000B 020300            5     ljmp interrupt_t        
+                       6     
+0100                   7     org 100h 
+0100                   8     main:
+                       9             
+0100 7820             10             mov R0, #20h             
+0102 E8               11             mov A, R0
+0103 F4               12             cpl A
+0104 FA               13             mov R2, A
+0105 794E             14             mov R1, #4eh                     
+0107 E9               15             mov A, R1
+0108 F4               16             cpl A
+0109 F9               17             mov R1,A
+010A EA               18             mov A,R2
+010B 04               19             inc A
+010C 4014             20             jc addone
+010E F8               21             mov R0,A
+                      22             
+                      23             
+010F D2AF             24             setb EA
+0111 D2A9             25             setb ET0
+                      26             
+0113 898C             27             mov 8ch, R1              
+0115 888A             28             mov 8ah, R0              
+                      29             
+0117 758901           30             mov 89h, #01h  
+011A 74FF             31             mov A, #0ffh
+011C 7B64             32             mov R3, #64h
+011E D28C             33             setb TCON.4  
+0120 80FE             34             here: sjmp here 
+0122                  35     addone: 
+0122 09               36     inc R1
+0123 22               37     ret
+                      38     
+0300                  39     org 300h 
+0300                  40     interrupt_t:
+                      41             
+0300 898C             42             mov 8ch, R1              
+0302 888A             43             mov 8ah, R0              
+0304 DB05             44             djnz R3, Blink 
+                      45             
+0306 F4               46             cpl A 
+0307 F590             47             mov P1, A   
+0309 7B64             48             mov R3, #64h  
+030B 32               49             Blink: reti 
+                      50     end
+A51 MACRO ASSEMBLER  LED_BLINK_WITH_HW_DELAY                                              02/17/2021 00:14:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADDONE . . . . . .  C ADDR   0122H   A   
+BLINK. . . . . . .  C ADDR   030BH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+HERE . . . . . . .  C ADDR   0120H   A   
+INTERRUPT_T. . . .  C ADDR   0300H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

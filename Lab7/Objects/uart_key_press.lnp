@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj" 
+TO ".\Objects\uart_key_press" 
+PRINT(".\Listings\uart_key_press.m51") RAMSIZE(256) 

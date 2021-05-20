@@ -1,0 +1,3 @@
+".\Objects\pam_lcd.obj" 
+TO ".\Objects\pam_lcd_display" 
+PRINT(".\Listings\pam_lcd_display.m51") RAMSIZE(256) 

@@ -1,0 +1,85 @@
+A51 MACRO ASSEMBLER  MEM_BLOCK_COPY                                                       01/27/2021 15:29:27 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\mem_block_copy.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE mem_block_copy.asm SET(SMALL) DEBUG PRINT(.\Listings\mem_
+                      block_copy.lst) OBJECT(.\Objects\mem_block_copy.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+0100                   4     main: 
+                       5     
+                       6     
+0100 75500A            7     mov 50h, #0Ah  
+0103 755160            8     mov 51h, #60h  
+0106 75525A            9     mov 52h, #5ah  
+                      10     
+0109 756005           11     mov 60h, #05h
+010C 756106           12     mov 61h, #06h
+010F 756207           13     mov 62h, #07h
+0112 756308           14     mov 63h, #08h
+0115 756409           15     mov 64h, #09h
+0118 75650A           16     mov 65h, #0ah
+011B 75660B           17     mov 66h, #0bh
+011E 75670C           18     mov 67h, #0ch
+0121 75680D           19     mov 68h, #0dh
+0124 75690E           20     mov 69h, #0eh
+0127 756A0F           21     mov 6ah, #0fh
+                      22     
+012A AA50             23     mov r2, 50h      
+012C A851             24     mov r0, 51h                      
+012E A952             25     mov r1, 52h                      
+                      26     
+0130 120135           27     LCALL memcpy
+                      28     
+0133 80FE             29     here: sjmp here
+0135 E9               30     memcpy: mov A, r1
+0136 C3               31     clr C
+0137 98               32     subb A,r0
+0138 400F             33     jc m2lessthanm1
+013A EA               34     mov A,r2
+013B 14               35     dec A  
+013C FD               36     mov r5,A  
+013D 28               37     add A, r0  
+013E F8               38     mov r0,A   
+013F ED               39     mov A,r5  
+0140 29               40     add A,r1  
+0141 F9               41     mov r1,A  
+0142 E6               42     m2more: mov A, @r0
+0143 F7               43     mov @r1, A
+0144 18               44     dec r0
+0145 19               45     dec r1
+0146 DAFA             46     djnz r2, m2more
+0148 22               47     ret
+                      48     
+0149 E6               49     m2lessthanm1: mov A, @r0
+014A F7               50     mov @r1, A
+014B 08               51     inc r0
+014C 09               52     inc r1
+014D DAFA             53     djnz r2, m2lessthanm1
+014F 22               54     ret
+                      55     
+                      56     end
+A51 MACRO ASSEMBLER  MEM_BLOCK_COPY                                                       01/27/2021 15:29:27 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0133H   A   
+M2LESSTHANM1 . . .  C ADDR   0149H   A   
+M2MORE . . . . . .  C ADDR   0142H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MEMCPY . . . . . .  C ADDR   0135H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

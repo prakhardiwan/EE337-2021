@@ -1,0 +1,163 @@
+C51 COMPILER V9.60.0.0   REACTION_TIMER                                                    03/10/2021 15:42:15 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE REACTION_TIMER
+OBJECT MODULE PLACED IN .\Objects\reaction_timer.obj
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE reaction_timer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\reaction_timer.lst) TABS(2) OBJECT(.\Objects\reaction_timer.obj)
+
+line level    source
+
+   1          //Header files
+   2          #include <at89c5131.h>
+   3          #include <stdio.h>  //for sprintf functions
+   4          
+   5          //Bit definitions
+   6          sbit RS=P0^0;
+   7          sbit RW=P0^1; //Also can use P0^1 or 0x80^1
+   8          sbit EN=P0^2;
+   9          sbit SW1=P1^0;
+  10          sbit LED = P1^4;
+  11          sbit prev_SW1 = P0^4;
+  12          //Global variables
+  13          unsigned char addr = 0x80;
+  14          unsigned int overflow_C  = 0;
+  15          //LCD functions
+  16          void lcd_init(void);
+  17          void lcd_cmd(unsigned int i);
+  18          void lcd_char(unsigned char ch);
+  19          void lcd_write_string(unsigned char *s);
+  20          void port_init(void);
+  21          
+  22          //Extern functions from assembly files
+  23          extern void timer_init(void);
+  24          extern void init(void);
+  25          extern void timer0_int(void);
+  26          
+  27          //Timer 0 ISR
+  28          void Timer0_Interrupt(void) interrupt 1
+  29          { 
+  30   1          overflow_C = overflow_C+1;
+  31   1          timer0_int();
+  32   1      }
+  33          
+  34          
+  35          //Delay function for time*1ms
+  36          void msdelay(unsigned int time)
+  37          {
+  38   1        int i,j;
+  39   1        for(i=0;i<time;i++)
+  40   1        {
+  41   2          for(j=0;j<318;j++);
+  42   2        }
+  43   1      }
+  44          //LCD utility functions
+  45          void lcd_cmd(unsigned int i)
+  46          {
+  47   1        RS=0;
+  48   1        RW=0;
+  49   1        EN=1;
+  50   1        P2=i;
+  51   1        msdelay(10);
+  52   1        EN=0;
+  53   1      }
+  54          void lcd_char(unsigned char ch)
+C51 COMPILER V9.60.0.0   REACTION_TIMER                                                    03/10/2021 15:42:15 PAGE 2   
+
+  55          {
+  56   1        RS=1;
+  57   1        RW=0;
+  58   1        EN=1;
+  59   1        P2=ch;
+  60   1        msdelay(10);
+  61   1        EN=0;
+  62   1      }
+  63          void lcd_write_string(unsigned char *s)
+  64          {
+  65   1        while(*s!='\0')   //Can use while(*s)
+  66   1        {
+  67   2          lcd_char(*s++);
+  68   2        }
+  69   1      }
+  70          void lcd_init(void) using 3
+  71          {
+  72   1        lcd_cmd(0x38);
+  73   1        msdelay(4);
+  74   1        lcd_cmd(0x06);
+  75   1        msdelay(4);
+  76   1        lcd_cmd(0x0C);
+  77   1        msdelay(4);
+  78   1        lcd_cmd(0x01);
+  79   1        msdelay(4);
+  80   1      }
+  81          
+  82          //Port initialization
+  83          void port_init(void)
+  84          {
+  85   1        P2=0x00;
+  86   1        EN=0;
+  87   1        RS=0;
+  88   1        RW=0;
+  89   1      }
+  90          
+  91          //Main function
+  92          int main(void)
+  93          {
+  94   1        unsigned char str[]="IITB";
+  95   1        unsigned char str2[16];
+  96   1        unsigned int loop_count = 0;
+  97   1        port_init();
+  98   1        lcd_init();
+  99   1        init(); // giving values to 81h and 82h for count
+ 100   1        timer_init();
+ 101   1        //lcd_cmd(0x80);
+ 102   1        //lcd_write_string(str);
+ 103   1        while(1)
+ 104   1        {
+ 105   2          lcd_cmd(0x80);
+ 106   2          sprintf(str2,"   Toggle SW1   ");
+ 107   2          lcd_write_string(str2);
+ 108   2          msdelay(10);
+ 109   2          lcd_cmd(0xC0);
+ 110   2          sprintf(str2," when LED glows ");
+ 111   2          lcd_write_string(str2);
+ 112   2          msdelay(2000); // delay of 2 seconds
+ 113   2          prev_SW1 = SW1;
+ 114   2          timer_init();   //initialize timer
+ 115   2          overflow_C  = 0;
+ 116   2          LED = 1;
+C51 COMPILER V9.60.0.0   REACTION_TIMER                                                    03/10/2021 15:42:15 PAGE 3   
+
+ 117   2          
+ 118   2          // wait for switch to occur
+ 119   2          while(SW1==prev_SW1){
+ 120   3          }
+ 121   2          LED = 0;
+ 122   2          //display the reaction time on lcd
+ 123   2          lcd_cmd(0x80);
+ 124   2          sprintf(str2,"  Reaction Time ");
+ 125   2          lcd_write_string(str2);
+ 126   2          msdelay(10);
+ 127   2          lcd_cmd(0xC0);
+ 128   2          sprintf(str2,"Count is %2.2bX %2.2bX%2.2bXh",overflow_C,TH0,TL0);
+ 129   2          lcd_write_string(str2);
+ 130   2          msdelay(5000); // delay of 5 seconds
+ 131   2          //Reset the timer values 
+ 132   2          overflow_C  = 0;
+ 133   2        }
+ 134   1      }
+ 135            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    432    ----
+   CONSTANT SIZE    =     86    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3      26
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

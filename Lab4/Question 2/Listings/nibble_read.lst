@@ -1,0 +1,70 @@
+A51 MACRO ASSEMBLER  NIBBLE_READ                                                          02/10/2021 12:27:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\nibble_read.obj
+ASSEMBLER INVOKED BY: D:\Keil\C51\BIN\A51.EXE nibble_read.asm SET(SMALL) DEBUG PRINT(.\Listings\nibble_read.lst) OBJECT(
+                      .\Objects\nibble_read.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+0100                   4     main: 
+0100 120105            5     lcall readNibble 
+0103 80FB              6     sjmp main 
+                       7     
+0105                   8     readNibble:
+                       9             
+0105 74FF             10             mov A,#0ffh 
+0107 F590             11             mov P1, A   
+0109 120300           12             lcall DELAY   
+010C E590             13             mov A, P1  
+010E 540F             14             anl A, #0fh  
+0110 F54E             15             mov 4eh, A     
+0112 C4               16             swap A
+0113 F590             17             mov P1, A        
+0115 120300           18             lcall DELAY   
+0118 22               19     ret 
+                      20     
+0300                  21     ORG 300H
+0300                  22     DELAY:  
+0300 7D14             23         MOV R5, #14h  
+0302                  24         AGAIN:  
+0302 7CD0             25             MOV R4,#0d0h
+0304                  26             AGAIN_one: 
+0304 00               27                             NOP
+0305 00               28                             NOP
+0306 7BDA             29                             MOV R3, #0dah
+0308                  30                             AGAIN_two:
+0308 7A04             31                                     MOV R2, #04h  
+030A                  32                                     AGAIN_three:
+030A DAFE             33                                             DJNZ R2, AGAIN_three 
+030C DBFA             34                                     DJNZ R3, AGAIN_two 
+030E DCF4             35             DJNZ R4,AGAIN_one
+0310 DDF0             36         DJNZ R5,AGAIN
+0312 22               37     RET
+                      38     END
+A51 MACRO ASSEMBLER  NIBBLE_READ                                                          02/10/2021 12:27:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0302H   A   
+AGAIN_ONE. . . . .  C ADDR   0304H   A   
+AGAIN_THREE. . . .  C ADDR   030AH   A   
+AGAIN_TWO. . . . .  C ADDR   0308H   A   
+DELAY. . . . . . .  C ADDR   0300H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+READNIBBLE . . . .  C ADDR   0105H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

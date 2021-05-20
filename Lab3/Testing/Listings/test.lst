@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  TEST                                                                 01/28/2021 21:12:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJE
+                      CT(.\Objects\test.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0
+0000 020100            2     LJMP MAIN
+                       3     
+0100                   4     ORG 100H
+0100                   5     MAIN:
+0100 B290              6         CPL P1.0
+0102 120300            7         LCALL DELAY
+0105 80F9              8     SJMP MAIN
+                       9     
+0300                  10     ORG 300H
+0300                  11     DELAY:
+0300 7D02             12         MOV R5,#2
+0302                  13         AGAIN:
+0302 7C64             14             MOV R4,#100
+0304                  15             AGAIN_inside:
+0304 DCFE             16             DJNZ R4,AGAIN_inside
+0306 DDFA             17         DJNZ R5,AGAIN
+0308 22               18     RET
+                      19     END
+A51 MACRO ASSEMBLER  TEST                                                                 01/28/2021 21:12:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0302H   A   
+AGAIN_INSIDE . . .  C ADDR   0304H   A   
+DELAY. . . . . . .  C ADDR   0300H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

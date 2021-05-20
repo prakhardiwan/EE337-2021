@@ -1,0 +1,84 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/17/2021  00:14:57  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE .\Objects\led_blink_with_hw_delay.obj TO .\Objects\led_blink_with_hw_delay PRINT (.\Listings\le
+>> d_blink_with_hw_delay.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\led_blink_with_hw_delay.obj (LED_BLINK_WITH_HW_DELAY)
+
+
+LINK MAP OF MODULE:  .\Objects\led_blink_with_hw_delay (LED_BLINK_WITH_HW_DELAY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     030CH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\led_blink_with_hw_delay (LED_BLINK_WITH_HW_DELAY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LED_BLINK_WITH_HW_DELAY
+  C:0122H         SYMBOL        ADDONE
+  C:030BH         SYMBOL        BLINK
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.1       SYMBOL        ET0
+  C:0120H         SYMBOL        HERE
+  C:0300H         SYMBOL        INTERRUPT_T
+  C:0100H         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  D:0088H         SYMBOL        TCON
+  C:0000H         LINE#         2
+  C:000BH         LINE#         5
+  C:0100H         LINE#         10
+  C:0102H         LINE#         11
+  C:0103H         LINE#         12
+  C:0104H         LINE#         13
+  C:0105H         LINE#         14
+  C:0107H         LINE#         15
+  C:0108H         LINE#         16
+  C:0109H         LINE#         17
+  C:010AH         LINE#         18
+  C:010BH         LINE#         19
+  C:010CH         LINE#         20
+  C:010EH         LINE#         21
+  C:010FH         LINE#         24
+  C:0111H         LINE#         25
+  C:0113H         LINE#         27
+  C:0115H         LINE#         28
+  C:0117H         LINE#         30
+  C:011AH         LINE#         31
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/17/2021  00:14:57  PAGE 2
+
+
+  C:011CH         LINE#         32
+  C:011EH         LINE#         33
+  C:0120H         LINE#         34
+  C:0122H         LINE#         36
+  C:0123H         LINE#         37
+  C:0300H         LINE#         42
+  C:0302H         LINE#         43
+  C:0304H         LINE#         44
+  C:0306H         LINE#         46
+  C:0307H         LINE#         47
+  C:0309H         LINE#         48
+  C:030BH         LINE#         49
+  -------         ENDMOD        LED_BLINK_WITH_HW_DELAY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0036H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=780
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,11 @@
+MOV A,#3EH
+MOV 0xF0,#02
+MOV R2,#0
+loop:DIV AB
+JNB 0xF0,loop_end
+MOV R1,A
+ADD A,#0DH
+MOV R2,A
+MOV A,R1
+loop_end:MOV 0xF0,#02H
+JNZ loop

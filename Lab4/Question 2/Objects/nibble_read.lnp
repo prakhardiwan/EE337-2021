@@ -1,0 +1,3 @@
+".\Objects\nibble_read.obj" 
+TO ".\Objects\nibble_read" 
+PRINT(".\Listings\nibble_read.m51") RAMSIZE(256) 

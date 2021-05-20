@@ -1,0 +1,38 @@
+A51 MACRO ASSEMBLER  TEST                                                                 01/24/2021 15:26:07 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJE
+                      CT(.\Objects\test.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000 743E              1     MOV A,#3EH
+0002 75F002            2     MOV 0xF0,#02
+0005 7A00              3     MOV R2,#0
+0007 84                4     loop:DIV AB
+0008 30F005            5     JNB 0xF0,loop_end
+000B F9                6     MOV R1,A
+000C 240D              7     ADD A,#0DH
+000E FA                8     MOV R2,A
+000F E9                9     MOV A,R1
+0010 75F002           10     loop_end:MOV 0xF0,#02H
+0013 70F2             11     JNZ loop
+*** WARNING #A41 IN 11 (test.asm, LINE 11): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  TEST                                                                 01/24/2021 15:26:07 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOP . . . . . . .  C ADDR   0007H   A   
+LOOP_END . . . . .  C ADDR   0010H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

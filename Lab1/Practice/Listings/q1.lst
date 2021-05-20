@@ -1,0 +1,38 @@
+A51 MACRO ASSEMBLER  Q1                                                                   01/18/2021 20:55:07 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\q1.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE q1.asm SET(SMALL) DEBUG PRINT(.\Listings\q1.lst) OBJECT(.
+                      \Objects\q1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp start
+0100                   3     org 100h
+0100 79BD              4     start: mov r1,#0BDH
+0102 7A0B              5     mov r2,#0BH
+0104 09                6     loop: inc r1
+0105 DAFD              7     djnz r2,loop
+0107 09                8     inc r1
+0108 8953              9     mov 53h,r1
+010A 80FE             10     here: sjmp here
+                      11     end
+A51 MACRO ASSEMBLER  Q1                                                                   01/18/2021 20:55:07 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   010AH   A   
+LOOP . . . . . . .  C ADDR   0104H   A   
+START. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

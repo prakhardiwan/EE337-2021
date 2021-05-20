@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj" 
+TO ".\Objects\matching_game" 
+PRINT(".\Listings\matching_game.m51") RAMSIZE(256) 

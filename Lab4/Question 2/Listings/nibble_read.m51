@@ -1,0 +1,75 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/10/2021  16:42:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE .\Objects\nibble_read.obj TO .\Objects\nibble_read PRINT (.\Listings\nibble_read.m51) RAMSIZE (
+>> 256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\nibble_read.obj (NIBBLE_READ)
+
+
+LINK MAP OF MODULE:  .\Objects\nibble_read (NIBBLE_READ)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0313H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\nibble_read (NIBBLE_READ)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        NIBBLE_READ
+  C:0302H         SYMBOL        AGAIN
+  C:0304H         SYMBOL        AGAIN_ONE
+  C:030AH         SYMBOL        AGAIN_THREE
+  C:0308H         SYMBOL        AGAIN_TWO
+  C:0300H         SYMBOL        DELAY
+  C:0100H         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  C:0105H         SYMBOL        READNIBBLE
+  C:0000H         LINE#         2
+  C:0100H         LINE#         5
+  C:0103H         LINE#         6
+  C:0105H         LINE#         10
+  C:0107H         LINE#         11
+  C:0109H         LINE#         12
+  C:010CH         LINE#         13
+  C:010EH         LINE#         14
+  C:0110H         LINE#         15
+  C:0112H         LINE#         16
+  C:0113H         LINE#         17
+  C:0115H         LINE#         18
+  C:0118H         LINE#         19
+  C:0300H         LINE#         23
+  C:0302H         LINE#         25
+  C:0304H         LINE#         27
+  C:0305H         LINE#         28
+  C:0306H         LINE#         29
+  C:0308H         LINE#         31
+  C:030AH         LINE#         33
+  C:030CH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/10/2021  16:42:47  PAGE 2
+
+
+  C:030EH         LINE#         35
+  C:0310H         LINE#         36
+  C:0312H         LINE#         37
+  -------         ENDMOD        NIBBLE_READ
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002FH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=787
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

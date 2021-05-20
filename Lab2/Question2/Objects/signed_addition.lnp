@@ -1,0 +1,3 @@
+".\Objects\signed_addition.obj" 
+TO ".\Objects\signed_addition" 
+PRINT(".\Listings\signed_addition.m51") RAMSIZE(256) 

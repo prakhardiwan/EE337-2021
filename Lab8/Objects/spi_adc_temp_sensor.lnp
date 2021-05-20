@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj" 
+TO ".\Objects\spi_adc_temp_sensor" 
+PRINT(".\Listings\spi_adc_temp_sensor.m51") RAMSIZE(256) 

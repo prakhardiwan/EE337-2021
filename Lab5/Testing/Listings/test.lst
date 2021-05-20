@@ -1,0 +1,51 @@
+A51 MACRO ASSEMBLER  TEST                                                                 02/14/2021 17:34:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: D:\Keil\C51\BIN\A51.EXE test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJECT(.\Objects\test
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main 
+0100                   3     org 100h
+                       4     
+0100                   5     main:
+0100 78A1              6     mov R0, #0a1h            
+0102 E8                7     mov A, R0
+0103 F4                8     cpl A
+0104 FA                9     mov R2, A
+0105 7910             10     mov R1, #10h                     
+0107 E9               11     mov A, R1
+0108 F4               12     cpl A
+0109 F9               13     mov R1,A
+010A EA               14     mov A,R2
+010B 04               15     inc A
+010C 4003             16     jc addone
+010E F8               17     mov R0,A
+010F 80FE             18     here: sjmp here
+                      19     
+0111                  20     addone: 
+0111 09               21     inc R1
+0112 22               22     ret
+                      23     
+                      24     end
+A51 MACRO ASSEMBLER  TEST                                                                 02/14/2021 17:34:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADDONE . . . . . .  C ADDR   0111H   A   
+HERE . . . . . . .  C ADDR   010FH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

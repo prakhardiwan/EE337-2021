@@ -1,0 +1,243 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              04/06/2021 13:03:49 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.ls
+                    -t) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include <stdio.h>  //for sprintf functions
+   3          #include "lcd.h"    //Header file with LCD interfacing functions
+   4          #include "serial.c" //C file with UART interfacing functions
+   5          
+   6          sbit LED=P1^7;
+   7          //global variables
+   8          unsigned char str1[8];
+   9          unsigned char str2[8];
+  10          //unsigned char str_0[8];
+  11          unsigned char map_to_char[16] = "qwertyuiasdfghjk";
+  12          unsigned char open_pos_val;  // the value at current open position
+  13          unsigned int i = 0;
+  14          unsigned count = 0;
+  15          unsigned char val[16] = "1234567812345678";
+  16          unsigned int lfsr = 0x0004; //B0
+  17          unsigned int next_lfsr = 0x0004;    // used for storing next state of lfsr
+  18          
+  19          // uncovered or covered position indicated by for eg: covered[i] = 0 --> uncovered position i ; 1 --> cove
+             -red position
+  20          // all of them are initially covered
+  21          unsigned char covered[16]; 
+  22          
+  23          // imp loop values
+  24          bit game_over = 0; // 0 --> game going on and 1--> game over
+  25          unsigned int min_moves = 1000;  // initialized to a very large value 
+  26          unsigned int moves = 0; // no. of moves played in current game
+  27          
+  28          bit even_num_uncov = 1; // 1--> no. of pos uncovered is even ; 0--> odd   
+  29          
+  30          void re_covered(void){
+  31   1      // initially every position covered
+  32   1        i = 0;
+  33   1        for(i;i<16;i=i+1){
+  34   2          covered[i] = '1';
+  35   2        }
+  36   1      }
+  37          // Display of LCD at various instants of the game
+  38          void lcd_game_start_display(void)
+  39          {
+  40   1          lcd_cmd(0x80);
+  41   1          lcd_write_string("********");
+  42   1          sprintf(str1,"  %d",moves);
+  43   1          lcd_write_string(str1);
+  44   1          msdelay(10);
+  45   1          lcd_cmd(0xC0);
+  46   1          lcd_write_string("********");
+  47   1          if(min_moves == 1000){
+  48   2            sprintf(str2,"  L:    "); // blank for the first game
+  49   2          }
+  50   1          else{
+  51   2            sprintf(str2,"  L:%d",min_moves);
+  52   2          }
+  53   1          lcd_write_string(str2);
+C51 COMPILER V9.60.0.0   MAIN                                                              04/06/2021 13:03:49 PAGE 2   
+
+  54   1          msdelay(100);
+  55   1      } 
+  56          
+  57          
+  58          // Updating the LCD values corresponding to the given position covered or uncovered bits
+  59          void lcd_update(unsigned int m) // 0<=m<=15
+  60          {   
+  61   1          // if no. of pos uncovered is even in that case any covered 
+  62   1          // spot will be newly uncovered 
+  63   1          
+  64   1          if(covered[m]=='1'){
+  65   2              // show the value at the position to lcd
+  66   2              if(m<8){    // first line
+  67   3                lcd_cmd(0x80+m); // add the req value of m to 0x80
+  68   3                lcd_write_char(val[m]);}
+  69   2              else{       // second line
+  70   3                lcd_cmd(0xC0+(m-8));  // add the req value of (m-8) to 0xC0
+  71   3                lcd_write_char(val[m]);
+  72   3              }
+  73   2              lcd_cmd(0x88);
+  74   2              moves = moves+1;
+  75   2              sprintf(str1,"  %d",moves);
+  76   2              lcd_write_string(str1);
+  77   2              if(even_num_uncov==1){    // newly uncovered position
+  78   3                  // value remains uncovered
+  79   3                  open_pos_val = val[m];
+  80   3                  even_num_uncov = 0;
+  81   3                  covered[m]='0';
+  82   3              }
+  83   2              else{   // second of the pair
+  84   3                if(val[m]==open_pos_val){
+  85   4                  covered[m]='0';
+  86   4                  even_num_uncov = 1;
+  87   4                }
+  88   3                else{
+  89   4                  even_num_uncov = 0;
+  90   4                  covered[m]='1';
+  91   4                  msdelay(3000);
+  92   4                  if(m<8){    // first line
+  93   5                    lcd_cmd(0x80+m); // add the req value of m to 0x80
+  94   5                    lcd_write_char('*');}
+  95   4                  else{       // second line
+  96   5                    lcd_cmd(0xC0+(m-8));  // add the req value of (m-8) to 0xC0
+  97   5                    lcd_write_char('*');
+  98   5                  }
+  99   4                }
+ 100   3              }
+ 101   2          }
+ 102   1          else{// if uncovered is pressed again 
+ 103   2              // Do nothing
+ 104   2          }
+ 105   1      }
+ 106          
+ 107          void next_lf(void){ // will update next_lfsr with itself 
+ 108   1        unsigned int p=0,q=0,r=0;
+ 109   1        q = (next_lfsr & 0x0001);
+ 110   1        r = ((next_lfsr & 0x0008)>>3);
+ 111   1        p = q^r;
+ 112   1        next_lfsr = next_lfsr>>1;
+ 113   1        next_lfsr |= (p<<3);
+ 114   1      }
+ 115          // shuffling the values with pseudo random numbers generated by LFSR
+C51 COMPILER V9.60.0.0   MAIN                                                              04/06/2021 13:03:49 PAGE 3   
+
+ 116          void shuffle_val(){
+ 117   1        unsigned int lfsr_prev = 0x0000; 
+ 118   1        val[lfsr] = '1';
+ 119   1        next_lf();
+ 120   1        val[(lfsr+next_lfsr)%16] = '1';
+ 121   1        
+ 122   1        next_lf();    // updates next_lfsr to next state 
+ 123   1        val[(lfsr+next_lfsr)%16] = '2';
+ 124   1        next_lf();
+ 125   1        val[(lfsr+next_lfsr)%16] = '2';
+ 126   1        
+ 127   1        next_lf();    // updates next_lfsr to next state 
+ 128   1        val[(lfsr+next_lfsr)%16] = '3';
+ 129   1        next_lf();
+ 130   1        val[(lfsr+next_lfsr)%16] = '3';
+ 131   1        
+ 132   1        next_lf();    // updates next_lfsr to next state 
+ 133   1        val[(lfsr+next_lfsr)%16] = '4';
+ 134   1        next_lf();
+ 135   1        val[(lfsr+next_lfsr)%16] = '4';
+ 136   1        
+ 137   1        next_lf();    // updates next_lfsr to next state 
+ 138   1        val[(lfsr+next_lfsr)%16] = '5';
+ 139   1        next_lf();
+ 140   1        val[(lfsr+next_lfsr)%16] = '5';
+ 141   1        
+ 142   1        next_lf();    // updates next_lfsr to next state 
+ 143   1        val[(lfsr+next_lfsr)%16] = '6';
+ 144   1        next_lf();
+ 145   1        val[(lfsr+next_lfsr)%16] = '6';
+ 146   1        
+ 147   1        next_lf();    // updates next_lfsr to next state 
+ 148   1        val[(lfsr+next_lfsr)%16] = '7';
+ 149   1        next_lf();
+ 150   1        val[(lfsr+next_lfsr)%16] = '7';
+ 151   1        
+ 152   1        next_lf();
+ 153   1        val[(lfsr+next_lfsr)%16] = '8';
+ 154   1        lfsr_prev = next_lfsr;
+ 155   1        // last 8 value remains 
+ 156   1        next_lf();
+ 157   1        val[(lfsr+next_lfsr)%16] = '8';
+ 158   1        lfsr = lfsr_prev; // assigns lfsr B0 to last state of lfsr
+ 159   1      }
+ 160          
+ 161          //Main function
+ 162          void main(void)
+ 163          {
+ 164   1        unsigned char ch = 0;
+ 165   1        while(1){
+ 166   2          game_over = 0; 
+ 167   2          moves = 0; // resetting number of moves to 0 
+ 168   2          re_covered(); // setting cover bits to 1 again
+ 169   2          
+ 170   2          //Call initialization functions
+ 171   2          lcd_init();
+ 172   2          uart_init();
+ 173   2          count  = 0; // for counting uncovered spots
+ 174   2          lcd_game_start_display();
+ 175   2          
+ 176   2          //These strings will be printed in terminal software
+ 177   2          transmit_string("New Game\r\n");
+C51 COMPILER V9.60.0.0   MAIN                                                              04/06/2021 13:03:49 PAGE 4   
+
+ 178   2          
+ 179   2          // Shuffling the numbers after each game
+ 180   2          shuffle_val();
+ 181   2          
+ 182   2          while(game_over==0)
+ 183   2          {
+ 184   3              //Receive a character
+ 185   3              ch = receive_char();
+ 186   3              count = 0;
+ 187   3              //Decide which position to unveil
+ 188   3              //Displays the data on LCD
+ 189   3              i=0;
+ 190   3              for(i; i<16;i=i+1){
+ 191   4                  if(ch==map_to_char[i]){
+ 192   5                    lcd_update(i);
+ 193   5                    transmit_char(map_to_char[i]);
+ 194   5                  }
+ 195   4                  if(covered[i]=='0'){
+ 196   5                    count = count+1;
+ 197   5                  }
+ 198   4              }
+ 199   3              if(count==16){
+ 200   4                game_over=1;
+ 201   4                if(moves<min_moves){
+ 202   5                // update minmoves and write to LCD
+ 203   5                  min_moves = moves;
+ 204   5                  lcd_cmd(0xC8);
+ 205   5                  sprintf(str2,"  L:%d",min_moves);
+ 206   5                  lcd_write_string(str2);
+ 207   5                }
+ 208   4              }
+ 209   3              msdelay(100);
+ 210   3          }
+ 211   2        }
+ 212   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1086    ----
+   CONSTANT SIZE    =     41    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     77       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      4    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

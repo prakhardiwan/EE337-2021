@@ -1,0 +1,130 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    01/20/2021  14:49:13  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\USERS\PRAKHAR\DESKTOP\C51\BIN\BL51.EXE .\Objects\hamming_code.obj TO .\Objects\hamming_code PRINT (.\Listings\hamming
+>> _code.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\hamming_code.obj (HAMMING_CODE)
+
+
+LINK MAP OF MODULE:  .\Objects\hamming_code (HAMMING_CODE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0186H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\hamming_code (HAMMING_CODE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HAMMING_CODE
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  C:0184H         SYMBOL        HERE
+  C:0100H         SYMBOL        MAIN
+  C:0000H         LINE#         2
+  C:0100H         LINE#         6
+  C:0103H         LINE#         7
+  C:0106H         LINE#         10
+  C:0108H         LINE#         11
+  C:010AH         LINE#         12
+  C:010CH         LINE#         13
+  C:010DH         LINE#         14
+  C:010FH         LINE#         15
+  C:0110H         LINE#         16
+  C:0111H         LINE#         17
+  C:0112H         LINE#         18
+  C:0113H         LINE#         19
+  C:0114H         LINE#         20
+  C:0115H         LINE#         22
+  C:0117H         LINE#         23
+  C:0119H         LINE#         24
+  C:011BH         LINE#         25
+  C:011DH         LINE#         26
+  C:011FH         LINE#         27
+  C:0121H         LINE#         29
+  C:0124H         LINE#         32
+  C:0126H         LINE#         33
+  C:0128H         LINE#         34
+  C:012AH         LINE#         35
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/20/2021  14:49:13  PAGE 2
+
+
+  C:012BH         LINE#         36
+  C:012CH         LINE#         37
+  C:012EH         LINE#         38
+  C:012FH         LINE#         39
+  C:0130H         LINE#         40
+  C:0131H         LINE#         41
+  C:0132H         LINE#         42
+  C:0133H         LINE#         43
+  C:0134H         LINE#         45
+  C:0136H         LINE#         46
+  C:0138H         LINE#         47
+  C:013AH         LINE#         48
+  C:013CH         LINE#         49
+  C:013EH         LINE#         50
+  C:0140H         LINE#         51
+  C:0142H         LINE#         53
+  C:0145H         LINE#         56
+  C:0147H         LINE#         57
+  C:0149H         LINE#         58
+  C:014BH         LINE#         59
+  C:014CH         LINE#         60
+  C:014EH         LINE#         61
+  C:014FH         LINE#         62
+  C:0150H         LINE#         63
+  C:0151H         LINE#         64
+  C:0152H         LINE#         65
+  C:0153H         LINE#         66
+  C:0154H         LINE#         68
+  C:0156H         LINE#         69
+  C:0158H         LINE#         70
+  C:015AH         LINE#         71
+  C:015CH         LINE#         72
+  C:015EH         LINE#         73
+  C:0160H         LINE#         75
+  C:0163H         LINE#         78
+  C:0165H         LINE#         79
+  C:0167H         LINE#         80
+  C:0169H         LINE#         81
+  C:016AH         LINE#         82
+  C:016BH         LINE#         83
+  C:016DH         LINE#         84
+  C:016EH         LINE#         85
+  C:016FH         LINE#         86
+  C:0170H         LINE#         87
+  C:0171H         LINE#         88
+  C:0172H         LINE#         89
+  C:0173H         LINE#         91
+  C:0175H         LINE#         92
+  C:0177H         LINE#         93
+  C:0179H         LINE#         94
+  C:017BH         LINE#         95
+  C:017DH         LINE#         96
+  C:017FH         LINE#         97
+  C:0181H         LINE#         98
+  C:0184H         LINE#         100
+  -------         ENDMOD        HAMMING_CODE
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/20/2021  14:49:13  PAGE 3
+
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0089H BYTE ( 6%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=390
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

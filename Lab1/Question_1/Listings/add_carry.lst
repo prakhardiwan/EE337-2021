@@ -1,0 +1,40 @@
+A51 MACRO ASSEMBLER  ADD_CARRY                                                            01/20/2021 14:41:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\add_carry.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE add_carry.asm SET(SMALL) DEBUG PRINT(.\Listings\add_carry
+                      .lst) OBJECT(.\Objects\add_carry.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+0100 E570              4     main: mov A, 70h         
+0102 AA71              5     mov r2, 71h                      
+0104 757300            6     mov 73h, #00h            
+0107 2A                7     add A, r2                        
+0108 F572              8     mov 72h, A                       
+010A 4002              9     jc carry_present     
+010C 80FE             10     here: sjmp here
+010E 757301           11     carry_present: mov 73h, #01h     
+0111 80F9             12     sjmp here 
+                      13     end
+A51 MACRO ASSEMBLER  ADD_CARRY                                                            01/20/2021 14:41:57 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CARRY_PRESENT. . .  C ADDR   010EH   A   
+HERE . . . . . . .  C ADDR   010CH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

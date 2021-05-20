@@ -1,0 +1,3 @@
+".\Objects\hamming_code.obj" 
+TO ".\Objects\hamming_code" 
+PRINT(".\Listings\hamming_code.m51") RAMSIZE(256) 

@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  SIGNED_ADDITION                                                      01/27/2021 15:36:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\signed_addition.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE signed_addition.asm SET(SMALL) DEBUG PRINT(.\Listings\sig
+                      ned_addition.lst) OBJECT(.\Objects\signed_addition.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+0100                   4     main: 
+                       5     
+0100 75607F            6     mov 60h, #7fh
+0103 75617E            7     mov 61h, #7eh
+                       8     
+0106 E560              9     mov A, 60h       
+0108 AA61             10     mov r2, 61h                      
+010A 2A               11     add A, r2                        
+                      12     
+010B F562             13     mov 62h, A                       
+010D 20D204           14     jb PSW.2, overflow_present     
+0110 D2D5             15     setb PSW.5 
+0112 80FE             16     here: sjmp here
+0114                  17     overflow_present: 
+0114 C2D5             18     clr PSW.5        
+0116 80FA             19     sjmp here 
+                      20     end
+A51 MACRO ASSEMBLER  SIGNED_ADDITION                                                      01/27/2021 15:36:32 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0112H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+OVERFLOW_PRESENT .  C ADDR   0114H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

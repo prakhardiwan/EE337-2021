@@ -1,0 +1,3 @@
+".\Objects\led_blink_with_hw_delay.obj" 
+TO ".\Objects\led_blink_with_hw_delay" 
+PRINT(".\Listings\led_blink_with_hw_delay.m51") RAMSIZE(256) 

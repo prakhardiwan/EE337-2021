@@ -1,0 +1,3 @@
+".\Objects\add_carry.obj" 
+TO ".\Objects\add_and_carry" 
+PRINT(".\Listings\add_and_carry.m51") RAMSIZE(256) 

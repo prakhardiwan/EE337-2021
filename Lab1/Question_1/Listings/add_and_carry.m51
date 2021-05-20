@@ -1,0 +1,53 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    01/20/2021  14:41:57  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\USERS\PRAKHAR\DESKTOP\C51\BIN\BL51.EXE .\Objects\add_carry.obj TO .\Objects\add_and_carry PRINT (.\Listings\add_and_c
+>> arry.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\add_carry.obj (ADD_CARRY)
+
+
+LINK MAP OF MODULE:  .\Objects\add_and_carry (ADD_CARRY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0113H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\add_and_carry (ADD_CARRY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ADD_CARRY
+  C:010EH         SYMBOL        CARRY_PRESENT
+  C:010CH         SYMBOL        HERE
+  C:0100H         SYMBOL        MAIN
+  C:0000H         LINE#         2
+  C:0100H         LINE#         4
+  C:0102H         LINE#         5
+  C:0104H         LINE#         6
+  C:0107H         LINE#         7
+  C:0108H         LINE#         8
+  C:010AH         LINE#         9
+  C:010CH         LINE#         10
+  C:010EH         LINE#         11
+  C:0111H         LINE#         12
+  -------         ENDMOD        ADD_CARRY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0016H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=275
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

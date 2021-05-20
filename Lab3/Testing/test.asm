@@ -1,0 +1,19 @@
+ORG 0
+LJMP MAIN
+
+ORG 100H
+MAIN:
+    CPL P1.0
+    LCALL DELAY
+SJMP MAIN
+
+ORG 300H
+DELAY:
+    MOV R5,#2
+    AGAIN:
+        MOV R4,#100
+        AGAIN_inside:
+        DJNZ R4,AGAIN_inside
+    DJNZ R5,AGAIN
+RET
+END

@@ -1,0 +1,74 @@
+A51 MACRO ASSEMBLER  TRY1                                                                 03/08/2021 09:08:41 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\try1.obj
+ASSEMBLER INVOKED BY: D:\Keil\C51\BIN\A51.EXE try1.a51 SET(SMALL) DEBUG PRINT(.\Listings\try1.lst) OBJECT(.\Objects\try1
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0097                 1     LED EQU P1.7
+                       2             
+                       3     ;ORG 000BH
+                       4             ;ACALL Timer0_interrupt 
+                       5             ;RETI
+                       6     NAME    Timer_subroutines
+                       7     
+                       8     ?PR?timer_init?TIMER_INIT    SEGMENT CODE
+                       9             PUBLIC  timer_init
+----                  10             RSEG    ?PR?timer_init?TIMER_INIT
+                      11                     ;USING register bank 2  
+0000 758911           12     timer_init: MOV TMOD,#0x11
+0003 D2D4             13                             SETB PSW.4
+                      14                             ;MOV TCON,#0x01
+0005 D2A9             15                             SETB ET0
+0007 D2AB             16                             SETB ET1
+0009 7581EF           17                             mov 81h,#0efh
+000C 7582B9           18                             mov 82h,#0b9h
+000F 7583F1           19                             mov 83h,#0f1h
+0012 758488           20                             mov 84h,#88h
+0015 7881             21                             MOV R0,#81H
+0017 7983             22                             MOV R1,#83H
+0019 868C             23                             MOV TH0,@R0
+001B 878D             24                             MOV TH1,@R1
+001D 08               25                             INC R0
+001E 09               26                             INC R1
+001F 868A             27                             MOV TL0,@R0
+0021 878B             28                             MOV TL1,@R1
+0023 C2D4             29                             CLR PSW.4
+0025 D2AF             30                             SETB EA
+0027 D28C             31                             SETB TR0
+0029 D28E             32                             SETB TR1
+002B 22               33                             RET      
+                      34     END
+A51 MACRO ASSEMBLER  TRY1                                                                 03/08/2021 09:08:41 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                    T Y P E  V A L U E   ATTRIBUTES
+
+?PR?TIMER_INIT?TIMER_INIT  C SEG    002CH       REL=UNIT
+EA. . . . . . . . . . . .  B ADDR   00A8H.7 A   
+ET0 . . . . . . . . . . .  B ADDR   00A8H.1 A   
+ET1 . . . . . . . . . . .  B ADDR   00A8H.3 A   
+LED . . . . . . . . . . .  B ADDR   0090H.7 A   
+P1. . . . . . . . . . . .  D ADDR   0090H   A   
+PSW . . . . . . . . . . .  D ADDR   00D0H   A   
+TH0 . . . . . . . . . . .  D ADDR   008CH   A   
+TH1 . . . . . . . . . . .  D ADDR   008DH   A   
+TIMER_INIT. . . . . . . .  C ADDR   0000H   R   SEG=?PR?TIMER_INIT?TIMER_INIT
+TIMER_SUBROUTINES . . . .  N NUMB   -----       
+TL0 . . . . . . . . . . .  D ADDR   008AH   A   
+TL1 . . . . . . . . . . .  D ADDR   008BH   A   
+TMOD. . . . . . . . . . .  D ADDR   0089H   A   
+TR0 . . . . . . . . . . .  B ADDR   0088H.4 A   
+TR1 . . . . . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,70 @@
+A51 MACRO ASSEMBLER  TOGGLE                                                               02/03/2021 16:39:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\toggle.obj
+ASSEMBLER INVOKED BY: C:\Users\Prakhar\Desktop\C51\BIN\A51.EXE toggle.asm SET(SMALL) DEBUG PRINT(.\Listings\toggle.lst) 
+                      OBJECT(.\Objects\toggle.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+0100                   4     main: 
+                       5     
+0100 75900F            6     mov P1, #0fh
+                       7     
+                       8     
+0103 E590              9     mov A,P1
+0105 540F             10     anl A, #0Fh  
+0107 F5F0             11     mov B, A  
+                      12     
+0109 E590             13     mov A, P1
+                      14     
+010B                  15     Count:
+010B 120300           16         LCALL DELAY
+010E 2410             17             ADD A, #10h  
+0110 F590             18             MOV P1, A 
+0112 80F7             19     SJMP Count
+                      20     
+                      21     
+0300                  22     ORG 300H
+0300                  23     DELAY:
+0300 ADF0             24         MOV R5, B  
+0302                  25         AGAIN:
+0302 7CD0             26             MOV R4,#0d0h
+0304                  27             AGAIN_one: 
+0304 7BDA             28                             MOV R3, #0dah
+0306                  29                             AGAIN_two:
+0306 7A04             30                                     MOV R2, #04h  
+0308                  31                                     AGAIN_three:
+0308 DAFE             32                                             DJNZ R2, AGAIN_three 
+030A DBFA             33                                     DJNZ R3, AGAIN_two 
+030C DCF6             34             DJNZ R4,AGAIN_one
+030E DDF2             35         DJNZ R5,AGAIN
+0310 22               36     RET
+                      37     END
+A51 MACRO ASSEMBLER  TOGGLE                                                               02/03/2021 16:39:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0302H   A   
+AGAIN_ONE. . . . .  C ADDR   0304H   A   
+AGAIN_THREE. . . .  C ADDR   0308H   A   
+AGAIN_TWO. . . . .  C ADDR   0306H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+COUNT. . . . . . .  C ADDR   010BH   A   
+DELAY. . . . . . .  C ADDR   0300H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
